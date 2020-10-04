@@ -10,13 +10,17 @@ from datetime import datetime
 Архивируетм все в нужной папке и сохраняем на уровень выше
 """
 
-where_files = 'C:/Users/Гоша/Documents/test/' # место, где хранятся файлы
-where_save = 'C:/Users/Гоша/Documents/'		  # место, где будет архив
-
 #where_files = input("Введите путь до папки, откда хотите сохранить информацию:")
 #where_save = input("Введите путь до папки, где буде сохранен архив:")
 
-z = zipfile.ZipFile(where_save + 'spam.zip', 'w') # Создание нового архива
+where_files = 'C:/Users/Гоша/Documents/test/' # место, где хранятся файлы
+where_save = 'C:/Users/Гоша/Documents/'		  # место, где будет архив
+
+"""
+Создание нового архива
+"""
+
+z = zipfile.ZipFile(where_save + 'spam.zip', 'w') 
 for root, dirs, files in os.walk(where_files): # Список всех файлов и папок в директории 
 	for file in files:
 		z.write(os.path.join(root,file), compress_type=zipfile.ZIP_DEFLATED) # Создание относительных путей и запись файлов в архив
@@ -25,7 +29,7 @@ z.close()
 
 
 """
-Потом код ниже закидывает архив на яндекс диск
+Потом закидываем архив на яндекс диск
 """
 
 #токен спрятан в отдельный файл
@@ -55,7 +59,11 @@ for address, dirs, files in folder:
 
 
 """
-Удаление директорий
+Удаление всех архивированных и записанных файлов для экономии места
+Нужно будет сделать такой вариант опциональным
+"""
+
+"""
 С помощью функции os.rmdir() можно удалить указанную папку:
 
 # удалить папку
